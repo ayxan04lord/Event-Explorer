@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="az" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Explorer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-bar" id="scrollBar"></div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" title="Modu dəyiş">
+        <span class="theme-toggle__icon" id="themeIcon">🌙</span>
+    </button>
+
+    <div class="app">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header__icon">⚡</div>
+            <h1 class="header__title">Event Explorer</h1>
+            <p class="header__subtitle">JavaScript Event Listeners — interaktiv demo</p>
+        </header>
+
+        <!-- ── ROW 1: Color + Counter ── -->
+        <div class="grid grid--2">
+
+            <!-- Color Changer Card -->
+            <section class="card">
+                <div class="card__label">mouseover / mouseout</div>
+                <h2 class="card__title">Rəng Dəyişdirici</h2>
+                <p class="card__desc">Düyməni hover et — rəng dəyişsin</p>
+                <div class="color-demo">
+                    <div class="color-preview" id="colorPreview"></div>
+                    <button class="btn btn--primary" id="colorBtn">Üzərimə gəl</button>
+                </div>
+                <div class="badge" id="colorBadge">Gözləyir...</div>
+            </section>
+
+            <!-- Click Counter Card -->
+            <section class="card">
+                <div class="card__label">click</div>
+                <h2 class="card__title">Klik Sayğacı</h2>
+                <p class="card__desc">Hər 10 klikdə konfetti!</p>
+                <div class="counter-display" id="counterDisplay">0</div>
+                <div class="btn-row">
+                    <button class="btn btn--success" id="incrementBtn">+ Artır</button>
+                    <button class="btn btn--danger"  id="resetBtn">↺ Sıfırla</button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ── ROW 2: Keyboard + Mouse Tracker ── -->
+        <div class="grid grid--2">
+
+            <!-- Keyboard Card -->
+            <section class="card">
+                <div class="card__label">keydown / keyup</div>
+                <h2 class="card__title">Klaviatura</h2>
+                <p class="card__desc">İstənilən düyməni bas</p>
+                <div class="key-display" id="keyDisplay">
+                    <span class="key-placeholder">🎹 Bir düymə bas...</span>
+                </div>
+                <div class="key-info" id="keyInfo"></div>
+            </section>
+
+            <!-- Mouse Tracker Card -->
+            <section class="card">
+                <div class="card__label">mousemove</div>
+                <h2 class="card__title">Mouse İzləyici</h2>
+                <p class="card__desc">Sahə üzərində hərəkət et</p>
+                <div class="tracker-zone" id="trackerZone">
+                    <div class="tracker-dot" id="trackerDot"></div>
+                    <span class="tracker-label" id="trackerLabel">X: — &nbsp; Y: —</span>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ── ROW 3: Live Input + Stopwatch ── -->
+        <div class="grid grid--2">
+
+            <!-- Input Live Card -->
+            <section class="card">
+                <div class="card__label">input / focus / blur</div>
+                <h2 class="card__title">Canlı Mətn</h2>
+                <p class="card__desc">Yazdıqca güzgüdə görünür</p>
+                <input type="text" class="text-input" id="liveInput"
+                       placeholder="Buraya yaz..." maxlength="60" />
+                <div class="mirror" id="mirror">
+                    <span class="mirror__placeholder">Hələ heç nə yoxdur...</span>
+                </div>
+                <div class="char-counter"><span id="charCount">0</span> / 60 simvol</div>
+            </section>
+
+            <!-- Stopwatch Card -->
+            <section class="card">
+                <div class="card__label">click</div>
+                <h2 class="card__title">Stopwatch</h2>
+                <p class="card__desc">Başlat, dayandır, sıfırla</p>
+                <div class="stopwatch-display" id="stopwatchDisplay">00:00.00</div>
+                <div class="btn-row">
+                    <button class="btn btn--success" id="swStart">▶ Başlat</button>
+                    <button class="btn btn--danger"  id="swStop" disabled>⏸ Dayandır</button>
+                    <button class="btn btn--ghost"   id="swReset">↺</button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ── ROW 4: Special Clicks + Drag & Drop ── -->
+        <div class="grid grid--2">
+
+            <!-- Special Clicks Card -->
+            <section class="card">
+                <div class="card__label">dblclick / contextmenu</div>
+                <h2 class="card__title">Xüsusi Kliklər</h2>
+                <p class="card__desc">Cüt klik et və ya sağ klik et</p>
+                <div class="click-zone" id="clickZone">
+                    <span id="clickZoneText">👆 Klik et</span>
+                </div>
+            </section>
+
+            <!-- Drag & Drop Card -->
+            <section class="card">
+                <div class="card__label">dragstart / dragover / drop</div>
+                <h2 class="card__title">Drag & Drop</h2>
+                <p class="card__desc">Kartları hərəkət etdir</p>
+                <div class="dnd-area">
+                    <div class="dnd-slot" id="slotA">
+                        <div class="dnd-item" draggable="true" data-id="item1">🔥 Atəş</div>
+                        <div class="dnd-item" draggable="true" data-id="item2">💧 Su</div>
+                        <div class="dnd-item" draggable="true" data-id="item3">🌿 Torpaq</div>
+                    </div>
+                    <div class="dnd-arrow">→</div>
+                    <div class="dnd-slot dnd-slot--target" id="slotB">
+                        <span class="dnd-hint">Bura burax</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ── Event Log ── -->
+        <section class="card card--log">
+            <div class="log-header">
+                <h2 class="card__title" style="margin:0">📋 Event Loqu</h2>
+                <div style="display:flex;gap:0.5rem;align-items:center">
+                    <span class="log-count" id="logCount">0 event</span>
+                    <button class="btn btn--ghost" id="clearLog">Təmizlə</button>
+                </div>
+            </div>
+            <ul class="log-list" id="logList">
+                <li class="log-empty">Hələ heç bir event baş verməyib</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
